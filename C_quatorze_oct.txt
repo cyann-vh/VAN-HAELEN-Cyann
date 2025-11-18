@@ -1,0 +1,81 @@
+let imgListe = [];
+
+let compteur = 0; 
+let gomme =0;
+let imgMasque = [];
+
+let newFeuille;
+
+let pinceau; 
+let size = 50
+
+function preload(){
+for (let i = 1; i <=12; i++) {//importer les images pinceaux
+                
+	imgListe[i-1]=loadImage('W/BW ('+i+').png');
+      
+	}   
+
+
+    for (let i = 1; i <11; i++) {//importer les images masque
+	imgMasque[i-1]=loadImage('masque/M('+i+').png');   
+	} 
+}
+
+function setup() {
+		imageMode(CENTER)
+		createCanvas(windowWidth,windowHeight);
+		for (let i = 0; i <imgListe.length; i++) {//redimensionner
+       imgListe[i].resize(100,50) //choisir la taille ici
+	}
+
+    for (let i = 0; i <imgMasque.length; i++) {//redimensionner
+       imgMasque[i].resize(0,height/2) //choisir la taille ici
+
+       pinceau = imgListe[int(random(imgListe.length))];
+	}
+
+////création d'un masque : 
+    newFeuille = createGraphics(windowWidth, windowHeight)
+    newFeuille.background(255);
+    newFeuille.blendMode(REMOVE);
+    newFeuille.imageMode(CENTER)
+    newFeuille.image(imgMasque[0],width/2,height/2)
+}
+
+function draw(){
+   tint(255,0,0)
+    let  x=noise(800+frameCount*0.01)*width
+    let y=noise(frameCount*0.01)*height
+     image(pinceau,x,y)
+}
+
+
+function mouseDragged(){
+    if (pinceau) {
+  image(pinceau, mouseX, mouseY, 50, 50);
+}
+
+    }
+
+function keyPressed(){
+    print(key)
+    if(key == "ArrowUp"){//flèche du haut
+		  size++;
+    }
+    
+      if(key == "ArrowDown"){
+	     size--;
+    }
+    
+
+     if(key=='Backspace'){
+            if(gomme == 1){
+                gomme =0
+                blendMode(BLEND)
+        }else{
+                gomme = 1
+                blendMode(REMOVE)
+        }
+}
+}

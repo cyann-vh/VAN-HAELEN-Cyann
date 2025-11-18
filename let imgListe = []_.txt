@@ -1,0 +1,71 @@
+let imgListe = [];
+let compteur = 0; 
+let gomme =0;
+let imgMasque = []
+let newFeuille;
+let trace
+let size =10;
+
+function preload(){
+for (let i = 1; i <8; i++) {//importer les images
+    imgListe[i-1]=loadImage('p5.js_vierge-main2\W\GIBW.png');     
+	}   
+
+    for (let i = 1; i <10; i++) {//importer les images 
+	imgMasque[i-1]=loadImage('masque/masque ('+i+').png');   
+	}
+}
+
+function setup() {
+    angleMode(DEGREES)
+    createCanvas(windowWidth, windowHeight)
+    for (let i = 0; i <imgMasque.length; i++) {//redimensionner
+       imgMasque[i].resize(0,height) //choisir la taille ici
+	}
+
+    newFeuille = createGraphics(windowWidth, windowHeight)
+    //newFeuille.background(255);
+    newFeuille.blendMode(REMOVE);
+    newFeuille.imageMode(CENTER)
+    newFeuille.image(imgMasque[0], width/2,height/2)
+    
+    
+}
+
+
+function draw(){
+
+ function draw(){
+//push() = faire en sorte qu'une banque d'images tournent
+    translate(300,300)  //changer le point que le carré va suivre en orbite. On déplace la feuille, pas la forme.
+    rotate(mouseX)
+    loadImage(0,0)-=2 // (0,0) le carré va se déplacer vers le point d'orbite
+//pop() = faire en sorte qu'un élément arrête de tourner
+}
+
+function mousePressed(){ // changer d'image au clic
+                compteur+=1
+	   if(compteur>imgListe.length-1){
+        compteur = 0;
+        }
+}
+
+
+function keyPressed()/// mode gomme ou dessin 
+
+    console.log(key)
+          if(key == 'Backspace'){
+                gomme =0
+                blendMode(BLEND)
+        }else{
+                gomme = 1
+                blendMode(REMOVE)
+        }
+
+        if(key== 'ArrowUp'){
+        size+=8
+
+        }
+
+        if(key=='ArrowDown')
+                
